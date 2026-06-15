@@ -1,0 +1,50 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Aspire.Hosting.GitHub.Models" Version="13.4.4" />
+    <PackageVersion Include="Aspire.Hosting.JavaScript" Version="13.4.4" />
+    <PackageVersion Include="Aspire.Hosting.SqlServer" Version="13.4.4" />
+    <PackageVersion Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="13.4.4" />
+    <PackageVersion Include="Aspire.OpenAI" Version="13.4.4-preview.1.26314.3" />
+    <PackageVersion Include="Azure.Monitor.OpenTelemetry.AspNetCore" Version="1.5.0" />
+    <!-- Manually referencing this because of vulnerability in Aspire-referenced version
+    https://github.com/microsoft/aspire/issues/18153  -->
+    <PackageVersion Include="MessagePack" Version="2.5.302" />
+    <PackageVersion Include="Microsoft.Agents.AI.Hosting.AGUI.AspNetCore"
+      Version="1.10.0-preview.260610.1" />
+    <PackageVersion Include="Microsoft.Agents.AI.Hosting.AspNetCore"
+      Version="1.10.0-preview.260610.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.9" />
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.9" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.9" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.9" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.ApiDescription.Server" Version="10.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.9" />
+    <PackageVersion Include="Microsoft.Identity.Web" Version="4.10.0" />
+    <PackageVersion Include="Microsoft.Identity.Web.DownstreamApi" Version="4.0.1" />
+    <PackageVersion Include="Microsoft.Identity.Web.UI" Version="4.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.7.0" />
+    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="10.7.0" />
+    <PackageVersion Include="ModelContextProtocol" Version="1.4.0" />
+    <PackageVersion Include="ModelContextProtocol.AspNetCore" Version="1.4.0" />
+    <PackageVersion Include="OneOf" Version="3.0.271" />
+    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.16.0" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.16.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.15.2" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.15.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.15.1" />
+    <PackageVersion Include="Riok.Mapperly" Version="4.3.1" />
+    <PackageVersion Include="coverlet.MTP" Version="10.0.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.9" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.9" />
+    <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport" Version="2.2.3" />
+    <PackageVersion Include="NSubstitute" Version="5.3.0" />
+    <PackageVersion Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageVersion Include="xunit.v3.mtp-v2" Version="3.2.2" />
+  </ItemGroup>
+</Project>
