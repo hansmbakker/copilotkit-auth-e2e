@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <NoWarn>CA2007;IDE0073</NoWarn>
+  </PropertyGroup>
+
+  <!-- Microsoft.Testing.Platform v2 configuration for test projects -->
+  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
+    <OutputType>Exe</OutputType>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+  </PropertyGroup>
+</Project>
