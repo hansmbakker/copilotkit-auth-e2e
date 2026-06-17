@@ -13,12 +13,21 @@ var devui = builder.AddDevUI("devui")
         agents: [new("TravelBookingAgent", "Travel booking agent")])
     .WaitFor(agentService);
 
+var copilotRuntime = builder
+    .AddJavaScriptApp("copilot-runtime", "../copilot-runtime")
+    .WithHttpEndpoint(env: "PORT")
+    .WithReference(agentService)
+    .WaitFor(agentService)
+    .WithExternalHttpEndpoints();
+
 #pragma warning disable ASPIRECERTIFICATES001
 var frontend = builder
     .AddViteApp("webfrontend", "../frontend")
     .WithHttpsEndpoint(7001, env: "PORT") // predictable port for Entra redirect URI
     .WithHttpsDeveloperCertificate()
-    .WithExternalHttpEndpoints();
+    .WithExternalHttpEndpoints()
+    .WithReference(copilotRuntime)
+    .WaitFor(copilotRuntime);
 #pragma warning restore ASPIRECERTIFICATES001
 
 builder.Build().Run();
