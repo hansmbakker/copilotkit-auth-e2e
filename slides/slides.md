@@ -285,14 +285,12 @@ layoutClass: gap-8
 ```json
 [
   {
-    "id": 1,
-    "userEmail": "alice@example.com",
+    "userId": "5441b521-335a-4fd6-958c-cced1ea0f804",
     "destination": "Amsterdam",
     "date": "2026-08-15"
   },
   {
-    "id": 2,
-    "userEmail": "hans@example.com",
+    "userId": "ddefe175-d966-4053-b29f-8b43b47e536e",
     "destination": "Tokyo",
     "date": "2026-09-01"
   }

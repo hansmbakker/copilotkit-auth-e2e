@@ -14,10 +14,12 @@ public class AgentTools
     public async Task<IEnumerable<Booking>> GetMyBookings()
     {
         var json = await File.ReadAllTextAsync("bookings.json");
-        return JsonSerializer.Deserialize<IEnumerable<Booking>>(json)!;
+        return JsonSerializer.Deserialize<IEnumerable<Booking>>(json, new JsonSerializerOptions(JsonSerializerDefaults.Web))!;
         // ⚠️ Returns ALL bookings — no user filtering yet!
     }
 }
+
+public record Booking(string UserId, string Destination, DateTime Date);
 // #endregion anonymous
 
 // #region authenticated
@@ -34,8 +36,10 @@ public class AgentTools(
     {
         var userId = GetCurrentUserId();
         var json = await File.ReadAllTextAsync("bookings.json");
-        var all = JsonSerializer.Deserialize<IEnumerable<Booking>>(json)!;
+        var all = JsonSerializer.Deserialize<IEnumerable<Booking>>(json, new JsonSerializerOptions(JsonSerializerDefaults.Web))!;
         return all.Where(b => b.UserId == userId);
     }
 }
+
+public record Booking(string UserId, string Destination, DateTime Date);
 // #endregion authenticated

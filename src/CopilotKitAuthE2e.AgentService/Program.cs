@@ -23,6 +23,9 @@ builder.Services.AddTransient<AgentTools>();
 travelAgent.WithAITool(sp =>
     AIFunctionFactory.Create(
         sp.GetRequiredService<AgentTools>().GetDestinations));
+travelAgent.WithAITool(sp =>
+    AIFunctionFactory.Create(
+        sp.GetRequiredService<AgentTools>().GetMyBookings));
 
 var app = builder.Build();
 app.MapDefaultEndpoints();
