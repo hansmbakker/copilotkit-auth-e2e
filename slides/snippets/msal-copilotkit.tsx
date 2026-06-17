@@ -5,7 +5,7 @@ import "@copilotkit/react-core/v2/styles.css";
 export function App() {
   return (
     <CopilotKitProvider runtimeUrl={import.meta.env.VITE_RUNTIME_URL}>
-      <CopilotChat agentId="TravelBookingAssistant" />
+      <CopilotChat agentId="TravelBookingAgent" />
     </CopilotKitProvider>
   );
 }
@@ -86,7 +86,7 @@ function AuthenticatedChat() {
       headers={headers}
       onError={onError}
     >
-      <CopilotChat agentId="TravelBookingAssistant" />
+      <CopilotChat agentId="TravelBookingAgent" />
     </CopilotKitProvider>
   );
 }

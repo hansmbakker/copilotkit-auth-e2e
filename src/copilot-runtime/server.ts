@@ -30,14 +30,13 @@ const handler = createCopilotRuntimeHandler({
 
 const app = express();
 
-// #region forward-headers
 // Delegate all /copilotkit/* requests to the fetch-native handler.
 // req.headers includes Authorization — forwarded unchanged to the agent service.
 app.all("/copilotkit/*splat", async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
   const webReq = new Request(url, {
     method: req.method,
-    headers: req.headers as Record<string, string>, // 👈 Authorization forwarded here
+    headers: req.headers as Record<string, string>,
     body: ["GET", "HEAD"].includes(req.method!) ? undefined : req,
     duplex: "half",
   } as RequestInit);
@@ -50,7 +49,6 @@ app.all("/copilotkit/*splat", async (req, res) => {
     res.end();
   }
 });
-// #endregion forward-headers
 
 app.get("/health", (_req, res) => {
   res.json({ status: "healthy" });

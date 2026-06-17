@@ -26,11 +26,11 @@ var copilotRuntime = builder
 #pragma warning disable ASPIRECERTIFICATES001
 var frontend = builder
     .AddViteApp("webfrontend", "../frontend")
-    .WithReference(copilotRuntime)
-    .WaitFor(copilotRuntime)
     .WithHttpsEndpoint(7001, env: "PORT") // predictable port for Entra redirect URI
     .WithHttpsDeveloperCertificate()
-    .WithExternalHttpEndpoints();
+    .WithExternalHttpEndpoints()
+    .WithReference(copilotRuntime)
+    .WaitFor(copilotRuntime);
 #pragma warning restore ASPIRECERTIFICATES001
 // #endregion frontend
 
