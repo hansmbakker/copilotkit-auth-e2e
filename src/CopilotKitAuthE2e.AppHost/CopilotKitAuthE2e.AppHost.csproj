@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AgentFramework.DevUI" />
+    <PackageReference Include="Aspire.Hosting.JavaScript" />
     <PackageReference Include="Aspire.Hosting.OpenAI" />
 
     <!-- Workaround for microsoft/agent-framework#5779 -->
