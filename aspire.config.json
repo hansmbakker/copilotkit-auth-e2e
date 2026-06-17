@@ -1,0 +1,5 @@
+{
+  "appHost": {
+    "path": "src/CopilotKitAuthE2e.AppHost/CopilotKitAuthE2e.AppHost.csproj"
+  }
+}
