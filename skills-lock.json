@@ -1,11 +1,131 @@
 {
   "version": 1,
   "skills": {
+    "a2ui-renderer": {
+      "source": "CopilotKit/CopilotKit",
+      "sourceType": "github",
+      "skillPath": "skills/a2ui-renderer/SKILL.md",
+      "computedHash": "95e30d7b289ad6cbcd3dcde1eafdf58142d1c497dc537eb8d22bf9810f12a9f1"
+    },
+    "aspire": {
+      "source": "microsoft/aspire-skills",
+      "sourceType": "github",
+      "skillPath": "skills/aspire/SKILL.md",
+      "computedHash": "fcf81a02a2f794422bea04350e128615e201d052ecb95c8b19fa4141452d20f3"
+    },
+    "aspire-deployment": {
+      "source": "microsoft/aspire-skills",
+      "sourceType": "github",
+      "skillPath": "skills/aspire-deployment/SKILL.md",
+      "computedHash": "fc71deda61e986ed2b3e216068405d76b1337b9825b23df8c35ee8a238a5acc2"
+    },
+    "aspire-init": {
+      "source": "microsoft/aspire-skills",
+      "sourceType": "github",
+      "skillPath": "skills/aspire-init/SKILL.md",
+      "computedHash": "b80490fd95311bf726f97c46b8dfc6fbe88d72f239ab13e196720e21585b490d"
+    },
+    "aspire-monitoring": {
+      "source": "microsoft/aspire-skills",
+      "sourceType": "github",
+      "skillPath": "skills/aspire-monitoring/SKILL.md",
+      "computedHash": "d2eb3be3045929365231cd72c04aa553ab4bf92c1397671c1ed4eb6c96eb82c2"
+    },
+    "aspire-orchestration": {
+      "source": "microsoft/aspire-skills",
+      "sourceType": "github",
+      "skillPath": "skills/aspire-orchestration/SKILL.md",
+      "computedHash": "5d160cc8292d227b4d7ccaa1af8b683a8a43cdd704f7ac016d93b80228a92e30"
+    },
+    "aspireify": {
+      "source": "microsoft/aspire-skills",
+      "sourceType": "github",
+      "skillPath": "skills/aspireify/SKILL.md",
+      "computedHash": "b9200146c40349b485e63a1758846ee26ce9d1dba19a97b65b6d935e1241777a"
+    },
+    "copilotkit-agui": {
+      "source": "CopilotKit/CopilotKit",
+      "sourceType": "github",
+      "skillPath": "skills/copilotkit-agui/SKILL.md",
+      "computedHash": "57a8f89ba1212667813a69505f37249e8d7ed52472249a4d5dda250dbdbd987c"
+    },
+    "copilotkit-contribute": {
+      "source": "CopilotKit/CopilotKit",
+      "sourceType": "github",
+      "skillPath": "skills/copilotkit-contribute/SKILL.md",
+      "computedHash": "fd3d1064923a94d116cdda0810631f8123498c10789c9422784ca0c6c41a3a47"
+    },
+    "copilotkit-debug": {
+      "source": "CopilotKit/CopilotKit",
+      "sourceType": "github",
+      "skillPath": "skills/copilotkit-debug/SKILL.md",
+      "computedHash": "a57919c98de8ce9f89d145496831300d0042af674ac367f7966f1f7f9ea7254f"
+    },
+    "copilotkit-develop": {
+      "source": "CopilotKit/CopilotKit",
+      "sourceType": "github",
+      "skillPath": "skills/copilotkit-develop/SKILL.md",
+      "computedHash": "6e4972c28780731f73f6ae3b3046ae7d94b672da3207712cff810ae26e10e84e"
+    },
+    "copilotkit-integrations": {
+      "source": "CopilotKit/CopilotKit",
+      "sourceType": "github",
+      "skillPath": "skills/copilotkit-integrations/SKILL.md",
+      "computedHash": "08ba8fe7b530545f69805f197e8949304f0839bc623a7580a2001e402ea743b8"
+    },
+    "copilotkit-self-update": {
+      "source": "CopilotKit/CopilotKit",
+      "sourceType": "github",
+      "skillPath": "skills/copilotkit-self-update/SKILL.md",
+      "computedHash": "22d09f38a1b83fdb6ee30629f5921f749072bcd63e885b23c19fcd723e6ea452"
+    },
+    "copilotkit-setup": {
+      "source": "CopilotKit/CopilotKit",
+      "sourceType": "github",
+      "skillPath": "skills/copilotkit-setup/SKILL.md",
+      "computedHash": "ba3c4226c65789ff2cc52337dd2e49944a166e233d4ef0e221d69c35b383e798"
+    },
+    "copilotkit-upgrade": {
+      "source": "CopilotKit/CopilotKit",
+      "sourceType": "github",
+      "skillPath": "skills/copilotkit-upgrade/SKILL.md",
+      "computedHash": "bb3a7b5b7195089488d14c7ab3108748886d5fa7e2060c5c7ef8d10719c489ff"
+    },
+    "dotnet-inspect": {
+      "source": "richlander/dotnet-inspect",
+      "sourceType": "github",
+      "skillPath": "skills/dotnet-inspect/SKILL.md",
+      "computedHash": "91be68aa56e61e8417e6e7ceb5042f1368e989bc3ac72801c124974cfced778f"
+    },
+    "playwright-cli": {
+      "source": "microsoft/playwright-cli",
+      "sourceType": "github",
+      "skillPath": "skills/playwright-cli/SKILL.md",
+      "computedHash": "fcba6ff28cfd109d224f0d8b55bfc0f81e514bdf2941c65662fd17ff6368cb1c"
+    },
+    "react-core": {
+      "source": "CopilotKit/CopilotKit",
+      "sourceType": "github",
+      "skillPath": "skills/react-core/SKILL.md",
+      "computedHash": "d0e85ab3303343a47153038f35e88b0f4f2fdf3ea80719c712e62bec950581fd"
+    },
+    "runtime": {
+      "source": "CopilotKit/CopilotKit",
+      "sourceType": "github",
+      "skillPath": "skills/runtime/SKILL.md",
+      "computedHash": "c9c750463022acfc4a3f19fa13446e06706cf06d313bff37574cdc483c4cbe58"
+    },
     "slidev": {
       "source": "slidevjs/slidev",
       "sourceType": "github",
       "skillPath": "skills/slidev/SKILL.md",
       "computedHash": "400f1c88033325513a4d97d1eb5f0e4ff444e6f73c1635f91e6f1f31cf56ba0a"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-best-practices/SKILL.md",
+      "computedHash": "ca7b0c0c6e5f2750043f7f0cd72d16ac4e2abc48f9b5500d047a4b77a2506212"
     }
   }
 }
