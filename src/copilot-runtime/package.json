@@ -4,12 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch server.ts",
-    "start": "tsx server.ts"
+    "dev": "tsx watch --import ./telemetry.ts server.ts",
+    "start": "tsx --import ./telemetry.ts server.ts"
   },
   "dependencies": {
     "@ag-ui/client": "^0.0.51",
     "@copilotkit/runtime": "^1.60.1",
+    "@opentelemetry/api": "^1.9.1",
+    "@opentelemetry/auto-instrumentations-node": "^0.77.0",
+    "@opentelemetry/exporter-metrics-otlp-grpc": "^0.219.0",
+    "@opentelemetry/exporter-trace-otlp-grpc": "^0.219.0",
+    "@opentelemetry/sdk-node": "^0.219.0",
     "express": "^5.2.1"
   },
   "devDependencies": {
