@@ -8,4 +8,16 @@
     <UserSecretsId>32685c90-816d-47b8-9505-716aab0c3761</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AgentFramework.DevUI" />
+    <PackageReference Include="Aspire.Hosting.OpenAI" />
+
+    <!-- Workaround for microsoft/agent-framework#5779 -->
+    <PackageReference Include="Microsoft.Agents.AI.DevUI" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CopilotKitAuthE2e.AgentService\CopilotKitAuthE2e.AgentService.csproj" />
+  </ItemGroup>
+
 </Project>
