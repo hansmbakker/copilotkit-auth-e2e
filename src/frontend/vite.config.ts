@@ -7,8 +7,8 @@ export default defineConfig({
   server: {
     proxy: {
       // Proxy API calls to the app service
-      '/api': {
-        target: process.env.SERVER_HTTPS || process.env.SERVER_HTTP,
+      '/copilotkit': {
+        target: process.env.COPILOT_RUNTIME_HTTPS || process.env.COPILOT_RUNTIME_HTTP,
         changeOrigin: true
       }
     }
