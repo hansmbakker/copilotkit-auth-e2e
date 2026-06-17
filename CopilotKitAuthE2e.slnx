@@ -1,2 +1,6 @@
 <Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CopilotKitAuthE2e.AppHost/CopilotKitAuthE2e.AppHost.csproj" />
+    <Project Path="src/CopilotKitAuthE2e.ServiceDefaults/CopilotKitAuthE2e.ServiceDefaults.csproj" />
+  </Folder>
 </Solution>

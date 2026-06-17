@@ -4,8 +4,10 @@
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="Aspire.Hosting.AgentFramework.DevUI" Version="1.10.0-preview.260610.1" />
     <PackageVersion Include="Aspire.Hosting.GitHub.Models" Version="13.4.4" />
     <PackageVersion Include="Aspire.Hosting.JavaScript" Version="13.4.4" />
+    <PackageVersion Include="Aspire.Hosting.OpenAI" Version="13.4.5" />
     <PackageVersion Include="Aspire.Hosting.SqlServer" Version="13.4.4" />
     <PackageVersion Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="13.4.4" />
     <PackageVersion Include="Aspire.OpenAI" Version="13.4.4-preview.1.26314.3" />
@@ -13,10 +15,8 @@
     <!-- Manually referencing this because of vulnerability in Aspire-referenced version
     https://github.com/microsoft/aspire/issues/18153  -->
     <PackageVersion Include="MessagePack" Version="2.5.302" />
-    <PackageVersion Include="Microsoft.Agents.AI.Hosting.AGUI.AspNetCore"
-      Version="1.10.0-preview.260610.1" />
-    <PackageVersion Include="Microsoft.Agents.AI.Hosting.AspNetCore"
-      Version="1.10.0-preview.260610.1" />
+    <PackageVersion Include="Microsoft.Agents.AI.Hosting.AGUI.AspNetCore" Version="1.10.0-preview.260610.1" />
+    <PackageVersion Include="Microsoft.Agents.AI.Hosting.AspNetCore" Version="1.10.0-preview.260610.1" />
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.9" />
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.9" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.9" />
