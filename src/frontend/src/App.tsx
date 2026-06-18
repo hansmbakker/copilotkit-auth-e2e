@@ -12,9 +12,11 @@ import {
   InteractionStatus,
   PublicClientApplication,
 } from "@azure/msal-browser";
-import { CopilotKit, CopilotChat, useCopilotKit } from "@copilotkit/react-core/v2";
+import { CopilotKit, CopilotChat, useCopilotKit, useRenderTool } from "@copilotkit/react-core/v2";
 import "@copilotkit/react-core/v2/styles.css";
+import { z } from "zod";
 import "./App.css";
+import { BookingCard, bookingSchema } from "./components/Booking";
 
 /** Redirect bridge page for MSAL v5 popup flows. Must be registered in Azure AD. */
 const POPUP_REDIRECT_URI = `${window.location.origin}/auth-redirect.html`;
@@ -110,50 +112,76 @@ function AppContent() {
     });
   };
 
+  useRenderTool({
+    name: 'GetMyBookings',
+    parameters: z.null(),
+    render: ({ name, status, result }) => {
+      switch (status) {
+        case "inProgress":
+          return <p>Preparing {name}…</p>;
+        case "executing":
+          return <p>Fetching your bookings</p>;
+        case "complete":
+          try {
+            const bookings: z.infer<typeof bookingSchema>[] = JSON.parse(result);
+            return (
+              <div className="flex flex-col gap-3 p-2">
+                {bookings.map((booking, i) => (
+                  <BookingCard key={i} destination={booking.destination} date={booking.date} />
+                ))}
+              </div>
+            );
+          } catch (e) {
+            return <p>Issue with the bookings. Result was: {result}</p>;
+          }
+      }
+    }
+  });
+
   return (
-    <CopilotKit runtimeUrl="/copilotkit" useSingleEndpoint={false} onError={handleCopilotError} agent="TravelBookingAgent">
-      <div className="app-layout">
-        <header className="app-header">
-          <AuthenticatedTemplate>
-            <h1>ABC Travel | Booking portal for {user?.name}</h1>
-            <button onClick={handleLogout} className="auth-button" disabled={authInProgress}>
-              Sign out
+    <div className="app-layout">
+      <header className="app-header">
+        <AuthenticatedTemplate>
+          <h1>ABC Travel | Booking portal for {user?.name}</h1>
+          <button onClick={handleLogout} className="auth-button" disabled={authInProgress}>
+            Sign out
+          </button>
+        </AuthenticatedTemplate>
+        <UnauthenticatedTemplate>
+          <h1>ABC Travel | Booking portal</h1>
+          <div className="auth-notice">
+            <span>{logoutInitiated ? "Signing out…" : inProgress !== InteractionStatus.None ? "Signing in…" : "You are browsing anonymously."}</span>
+            <button
+              onClick={handleLogin}
+              className="auth-button auth-button--primary"
+              disabled={authInProgress}
+            >
+              Sign in
             </button>
-          </AuthenticatedTemplate>
-          <UnauthenticatedTemplate>
-            <h1>ABC Travel | Booking portal</h1>
-            <div className="auth-notice">
-              <span>{logoutInitiated ? "Signing out…" : inProgress !== InteractionStatus.None ? "Signing in…" : "You are browsing anonymously."}</span>
-              <button
-                onClick={handleLogin}
-                className="auth-button auth-button--primary"
-                disabled={authInProgress}
-              >
-                Sign in
-              </button>
-            </div>
-          </UnauthenticatedTemplate>
-        </header>
+          </div>
+        </UnauthenticatedTemplate>
+      </header>
 
-        <main className="app-main">
-          <UnauthenticatedTemplate>
-            <div className="anonymous-banner">
-              Sign in to work with your bookings. Without it, you will have a generic experience.
-            </div>
-          </UnauthenticatedTemplate>
+      <main className="app-main">
+        <UnauthenticatedTemplate>
+          <div className="anonymous-banner">
+            Sign in to work with your bookings. Without it, you will have a generic experience.
+          </div>
+        </UnauthenticatedTemplate>
 
-          <TokenSync token={token ?? ""} />
-          <CopilotChat agentId="TravelBookingAgent" />
-        </main>
-      </div>
-    </CopilotKit>
+        <TokenSync token={token ?? ""} />
+        <CopilotChat agentId="TravelBookingAgent" />
+      </main>
+    </div>
   );
 }
 
 export function App() {
   return (
     <MsalProvider instance={msalInstance}>
-      <AppContent />
+      <CopilotKit runtimeUrl="/copilotkit" useSingleEndpoint={false} onError={handleCopilotError} agent="TravelBookingAgent">
+        <AppContent />
+      </CopilotKit>
     </MsalProvider>
   );
 }
