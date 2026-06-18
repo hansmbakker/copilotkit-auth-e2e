@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import {
   AuthenticatedTemplate,
@@ -31,22 +32,26 @@ const handleCopilotError = ({ error }: { error?: Error }) => {
   console.error("[CopilotKit] runtime error:", error);
 };
 
-/** Pushes a fresh bearer token into the provider without remounting it. */
+/** Pushes a fresh bearer token into the provider without remounting it. Clears the header when token is empty. */
 function TokenSync({ token }: { token: string }) {
   const { copilotkit } = useCopilotKit();
   useEffect(() => {
-    copilotkit.setHeaders({ Authorization: `Bearer ${token}` });
+    copilotkit.setHeaders({ Authorization: token ? `Bearer ${token}` : "" });
   }, [copilotkit, token]);
   return null;
 }
 
-function useMsalToken(): string | null {
+function useMsalToken(suppressAcquire = false): string | null {
   const { instance, accounts, inProgress } = useMsal();
-  const account = useAccount(accounts[0] ?? {});
+  const account = useAccount(accounts[0] ?? null);
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!account || inProgress !== InteractionStatus.None) return;
+    if (!account || suppressAcquire || inProgress === InteractionStatus.Logout) {
+      setToken(null);
+      return;
+    }
+    if (inProgress !== InteractionStatus.None) return;
     let cancelled = false;
 
     instance
@@ -68,30 +73,28 @@ function useMsalToken(): string | null {
     return () => {
       cancelled = true;
     };
-  }, [instance, account, inProgress]);
+  }, [instance, account, inProgress, suppressAcquire]);
 
   return token;
 }
 
-function AuthenticatedChat() {
-  const token = useMsalToken();
-
-  if (!token) return <p className="anonymous-banner">Acquiring access token…</p>;
-
-  return (
-    <CopilotKit runtimeUrl="/copilotkit" useSingleEndpoint={false} onError={handleCopilotError} agent="TravelBookingAgent">
-      <TokenSync token={token} />
-      <CopilotChat agentId="TravelBookingAgent" />
-    </CopilotKit>
-  );
-}
-
 function AppContent() {
   const { instance, accounts, inProgress } = useMsal();
-  const user = useAccount(accounts[0] ?? {});
+  const user = useAccount(accounts[0] ?? null);
   const authInProgress = inProgress !== InteractionStatus.None;
+  const [logoutInitiated, setLogoutInitiated] = useState(false);
+  const token = useMsalToken(logoutInitiated);
+
+  // Reset logoutInitiated once MSAL finishes processing (popup closed or logout complete).
+  // Without this, a cancelled popup leaves suppressAcquire=true forever.
+  useEffect(() => {
+    if (logoutInitiated && inProgress === InteractionStatus.None) {
+      setLogoutInitiated(false);
+    }
+  }, [logoutInitiated, inProgress]);
 
   const handleLogin = () => {
+    setLogoutInitiated(false);
     instance
       .loginPopup({ scopes: [import.meta.env.VITE_API_SCOPE], redirectUri: POPUP_REDIRECT_URI })
       .then((result) => { instance.setActiveAccount(result.account); })
@@ -101,49 +104,49 @@ function AppContent() {
   };
 
   const handleLogout = () => {
+    setLogoutInitiated(true);
     instance.logoutPopup().catch((error: unknown) => {
       console.warn("[MSAL] logoutPopup cancelled or failed:", error);
     });
   };
 
   return (
-    <div className="app-layout">
-      <header className="app-header">
-        <AuthenticatedTemplate>
-          <h1>ABC Travel | Booking portal for {user?.name}</h1>
-          <button onClick={handleLogout} className="auth-button" disabled={authInProgress}>
-            Sign out
-          </button>
-        </AuthenticatedTemplate>
-        <UnauthenticatedTemplate>
-          <h1>ABC Travel | Booking portal</h1>
-          <div className="auth-notice">
-            <span>{authInProgress ? "Signing in…" : "You are browsing anonymously."}</span>
-            <button
-              onClick={handleLogin}
-              className="auth-button auth-button--primary"
-              disabled={authInProgress}
-            >
-              Sign in
+    <CopilotKit runtimeUrl="/copilotkit" useSingleEndpoint={false} onError={handleCopilotError} agent="TravelBookingAgent">
+      <div className="app-layout">
+        <header className="app-header">
+          <AuthenticatedTemplate>
+            <h1>ABC Travel | Booking portal for {user?.name}</h1>
+            <button onClick={handleLogout} className="auth-button" disabled={authInProgress}>
+              Sign out
             </button>
-          </div>
-        </UnauthenticatedTemplate>
-      </header>
+          </AuthenticatedTemplate>
+          <UnauthenticatedTemplate>
+            <h1>ABC Travel | Booking portal</h1>
+            <div className="auth-notice">
+              <span>{logoutInitiated ? "Signing out…" : inProgress !== InteractionStatus.None ? "Signing in…" : "You are browsing anonymously."}</span>
+              <button
+                onClick={handleLogin}
+                className="auth-button auth-button--primary"
+                disabled={authInProgress}
+              >
+                Sign in
+              </button>
+            </div>
+          </UnauthenticatedTemplate>
+        </header>
 
-      <main className="app-main">
-        <AuthenticatedTemplate>
-          <AuthenticatedChat />
-        </AuthenticatedTemplate>
-        <UnauthenticatedTemplate>
-          <CopilotKit runtimeUrl="/copilotkit" useSingleEndpoint={false} onError={handleCopilotError} agent="TravelBookingAgent">
+        <main className="app-main">
+          <UnauthenticatedTemplate>
             <div className="anonymous-banner">
               Sign in to work with your bookings. Without it, you will have a generic experience.
             </div>
-            <CopilotChat agentId="TravelBookingAgent" />
-          </CopilotKit>
-        </UnauthenticatedTemplate>
-      </main>
-    </div>
+          </UnauthenticatedTemplate>
+
+          <TokenSync token={token ?? ""} />
+          <CopilotChat agentId="TravelBookingAgent" />
+        </main>
+      </div>
+    </CopilotKit>
   );
 }
 
