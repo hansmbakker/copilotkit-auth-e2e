@@ -15,6 +15,7 @@ var devui = builder.AddDevUI("devui")
 
 var copilotRuntime = builder
     .AddJavaScriptApp("copilot-runtime", "../copilot-runtime")
+    .WithEnvironment("COPILOTKIT_TELEMETRY_DISABLED", "true")
     .WithHttpEndpoint(env: "PORT")
     .WithReference(agentService)
     .WaitFor(agentService)
