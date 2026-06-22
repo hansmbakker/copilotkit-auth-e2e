@@ -5,12 +5,16 @@
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/dotnet:dev-10.0-noble",
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:3.0.1": {
+    "ghcr.io/microsoft/aspire-devcontainer-feature/aspire:2": {},
+		"ghcr.io/devcontainers/features/docker-in-docker:3.1.0": {
       "version": "latest",
       "enableNonRootDocker": true,
       "moby": true
     },
-    "ghcr.io/devcontainers/features/node:2.0.0": {},
+    "ghcr.io/devcontainers/features/powershell:2.0.2": {},
+		"ghcr.io/devcontainers/features/node:2.1.0": {},
+		"ghcr.io/devcontainers/features/python:1": {},
+		"ghcr.io/devcontainers-extra/features/uv:1": {},
     "ghcr.io/devcontainers/features/terraform:1": {}
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -22,14 +26,12 @@
   // }
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "dotnet restore",
-  "onCreateCommand": "curl -sSL https://aspire.dev/install.sh | bash",
   "postStartCommand": "dotnet dev-certs https --trust",
   "customizations": {
     "vscode": {
       "extensions": [
         "ms-dotnettools.csdevkit",
         "GitHub.copilot-chat",
-        "GitHub.copilot",
         "EditorConfig.EditorConfig",
         "oxc.oxc-vscode",
         "ms-mssql.mssql",
