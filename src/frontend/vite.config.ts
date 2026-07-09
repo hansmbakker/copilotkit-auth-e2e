@@ -8,9 +8,9 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
+        main: resolve(import.meta.dirname, 'index.html'),
         // MSAL v5 redirect bridge page for popup flows
-        authRedirect: resolve(__dirname, 'auth-redirect.html'),
+        authRedirect: resolve(import.meta.dirname, 'auth-redirect.html'),
       },
     },
   },

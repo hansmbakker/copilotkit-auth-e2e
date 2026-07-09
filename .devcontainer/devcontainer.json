@@ -5,16 +5,37 @@
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/dotnet:dev-10.0-noble",
   "features": {
-    "ghcr.io/microsoft/aspire-devcontainer-feature/aspire:2": {},
-		"ghcr.io/devcontainers/features/docker-in-docker:3.1.0": {
+    "ghcr.io/microsoft/aspire-devcontainer-feature/aspire:3.0.0": {},
+		"ghcr.io/devcontainers/features/docker-in-docker:4.1.0": {
       "version": "latest",
       "enableNonRootDocker": true,
       "moby": true
     },
     "ghcr.io/devcontainers/features/powershell:2.0.2": {},
 		"ghcr.io/devcontainers/features/node:2.1.0": {},
-		"ghcr.io/devcontainers-extra/features/uv:1": {}
+		"ghcr.io/devcontainers-extra/features/uv:1": {},
+    // This is used to create a dev certificate on the host and inject it into the devcontainer so that you can open services
+		// from the browser on your host. David Negstad is a Microsoft employee and is one of the .NET Aspire maintainers.
+		"ghcr.io/dnegstad/devcontainer-dev-certs/devcontainer-dev-certs:1.4.1": {}
   },
+  // Environment variables for .NET and ASP.NET Core to ensure the Development environment is used.
+  // Without Development, the AppHost's automatic AddUserSecrets() call is skipped, so previously
+	// entered `secret: true` parameter values are never read back from user secrets — every restart
+	// looks like they were lost, even though secrets.json still has them. Setting it here fixes it
+	// for every project in the container, independent of any one project's launchSettings.json.
+	"containerEnv": {
+		"DOTNET_ENVIRONMENT": "Development",
+		"ASPNETCORE_ENVIRONMENT": "Development"
+	},
+  // /home/vscode lives on the container's writable layer, which is discarded whenever the
+	// container is recreated (rebuild, feature update, host recycling it, etc.) — unlike
+	// /workspaces, which is a separate persistent volume. dotnet user-secrets (used by the
+	// Aspire AppHost to store `secret: true` parameter values) writes to
+	// ~/.microsoft/usersecrets, so without this mount those values are lost on every recreate.
+	"mounts": [
+		"source=${localWorkspaceFolderBasename}-usersecrets,target=/home/vscode/.microsoft,type=volume"
+	],
+
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [5000, 5001],
   // "portsAttributes": {
@@ -24,8 +45,8 @@
   // }
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "dotnet restore",
-  "postCreateCommand": "curl -fsSL https://bun.sh/install | bash",
-  "postStartCommand": "dotnet dev-certs https --trust",
+	"onCreateCommand": ".devcontainer/onCreate.sh",
+  "postStartCommand": ".devcontainer/postStart.sh",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -34,8 +55,9 @@
         "EditorConfig.EditorConfig",
         "oxc.oxc-vscode",
         "ms-mssql.mssql",
+				"ms-windows-ai-studio.windows-ai-studio",
         "microsoft-aspire.aspire-vscode",
-        "oxc.oxc-vscode"
+        "typescriptteam.native-preview"
       ]
     }
   },

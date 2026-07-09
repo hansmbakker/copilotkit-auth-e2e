@@ -1,0 +1,34 @@
+{
+  "features": {
+    "ghcr.io/devcontainers-extra/features/uv:1": {
+      "version": "1.0.2",
+      "resolved": "ghcr.io/devcontainers-extra/features/uv@sha256:1ac5b9f17a9e9e745933d0ac2ecf758e06ed3da4423cd22c94cce4d482fd2dd8",
+      "integrity": "sha256:1ac5b9f17a9e9e745933d0ac2ecf758e06ed3da4423cd22c94cce4d482fd2dd8"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:4.1.0": {
+      "version": "4.1.0",
+      "resolved": "ghcr.io/devcontainers/features/docker-in-docker@sha256:7d979c4a36d595eb4ab79909caa3f396daf3b6152dcf38e8328ea4eff42206c7",
+      "integrity": "sha256:7d979c4a36d595eb4ab79909caa3f396daf3b6152dcf38e8328ea4eff42206c7"
+    },
+    "ghcr.io/devcontainers/features/node:2.1.0": {
+      "version": "2.1.0",
+      "resolved": "ghcr.io/devcontainers/features/node@sha256:586c9a6f7dd40bd3ba2cd41e7f2f88dcc31fbe5d1442afcbf07ffbc66b686857",
+      "integrity": "sha256:586c9a6f7dd40bd3ba2cd41e7f2f88dcc31fbe5d1442afcbf07ffbc66b686857"
+    },
+    "ghcr.io/devcontainers/features/powershell:2.0.2": {
+      "version": "2.0.2",
+      "resolved": "ghcr.io/devcontainers/features/powershell@sha256:82ea3880c5706ac3963f1b5e940a7f5871835393a5472f80008148b995d58d61",
+      "integrity": "sha256:82ea3880c5706ac3963f1b5e940a7f5871835393a5472f80008148b995d58d61"
+    },
+    "ghcr.io/dnegstad/devcontainer-dev-certs/devcontainer-dev-certs:1.4.1": {
+      "version": "1.4.1",
+      "resolved": "ghcr.io/dnegstad/devcontainer-dev-certs/devcontainer-dev-certs@sha256:c17a80828bc3d1aca0e4465ea58c2f69a84d1a2a62c8e697eef4e2c07a987779",
+      "integrity": "sha256:c17a80828bc3d1aca0e4465ea58c2f69a84d1a2a62c8e697eef4e2c07a987779"
+    },
+    "ghcr.io/microsoft/aspire-devcontainer-feature/aspire:3.0.0": {
+      "version": "3.0.0",
+      "resolved": "ghcr.io/microsoft/aspire-devcontainer-feature/aspire@sha256:84b1b94aaf5152ac347f51e8c49ba02acfbc24d9b2df06c51bd4d83013a4e343",
+      "integrity": "sha256:84b1b94aaf5152ac347f51e8c49ba02acfbc24d9b2df06c51bd4d83013a4e343"
+    }
+  }
+}

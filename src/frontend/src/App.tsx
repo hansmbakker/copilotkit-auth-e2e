@@ -94,7 +94,7 @@ function AppContent() {
   };
 
   return (
-    <CopilotKit runtimeUrl="/copilotkit" useSingleEndpoint={false} agent="TravelBookingAgent">
+    <CopilotKit runtimeUrl="/copilotkit" useSingleEndpoint={false}>
       <div className="app-layout">
         <header className="app-header">
           <AuthenticatedTemplate>

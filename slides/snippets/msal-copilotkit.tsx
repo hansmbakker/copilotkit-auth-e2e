@@ -5,8 +5,7 @@ import "@copilotkit/react-core/v2/styles.css";
 export function App() {
   return (
     <CopilotKit runtimeUrl="/copilotkit"
-      useSingleEndpoint={false}
-      agent="TravelBookingAgent">
+      useSingleEndpoint={false}>
       <CopilotChat agentId="TravelBookingAgent" />
     </CopilotKit>
   );
@@ -82,7 +81,7 @@ function AppContent() {
   const token = useMsalToken();
 
   return (
-    <CopilotKit runtimeUrl="/copilotkit" useSingleEndpoint={false} agent="TravelBookingAgent">
+    <CopilotKit runtimeUrl="/copilotkit" useSingleEndpoint={false}>
       <TokenSync token={token ?? ""} />
       <CopilotChat agentId="TravelBookingAgent" />
     </CopilotKit>

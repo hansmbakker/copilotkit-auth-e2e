@@ -12,7 +12,7 @@ builder.AddServiceDefaults();
 builder.AddOpenAIClient(connectionName: "openai")
        .AddChatClient("gpt-5.4-mini"); // model deployment name from Azure AI Foundry
 
-builder.Services.AddAGUI();
+builder.Services.AddAGUIServer();
 
 builder.Services.AddOpenAIResponses();
 builder.Services.AddOpenAIConversations();
@@ -26,7 +26,7 @@ var travelAgent = builder.AddAIAgent(
     instructions: "You are a helpful travel booking assistant.")
     .WithInMemorySessionStore(withIsolation: true);
 
-builder.Services.UseClaimsBasedSessionIsolation(new()
+builder.Services.UseClaimsBasedAgentIsolation(new()
 {
     ClaimType = ClaimTypes.NameIdentifier
 });
@@ -48,6 +48,6 @@ app.UseAuthorization();
 app.MapOpenAIResponses();            // OpenAI-compatible endpoints (DevUI)
 app.MapOpenAIConversations();
 
-app.MapAGUI(travelAgent, "/agui").RequireAuthorization();  // /agui — AGUI (Copilot Runtime)
+app.MapAGUIServer(travelAgent, "/agui").RequireAuthorization();  // /agui — AGUI (Copilot Runtime)
 
 app.Run();
