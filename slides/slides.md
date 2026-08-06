@@ -360,11 +360,11 @@ hideInToc: true
 Walk through step by step:
 - Lines 1-2: WebApplicationBuilder + AddServiceDefaults (Aspire OTel + health)
 - Lines 4-5: AddOpenAIClient — picks up the "openai" connection from Aspire; AddChatClient wires the model deployment
-- Lines 7-10: AddAGUI, AddOpenAIResponses, AddOpenAIConversations — protocol and OpenAI-compatible endpoint support
+- Lines 7-10: AddAGUIServer, AddOpenAIResponses, AddOpenAIConversations — protocol and OpenAI-compatible endpoint support
 - Lines 12-15: AddAIAgent — register agent with name, instructions, and in-memory session store (isolation disabled for demo)
 - Lines 17-20: AddTransient<AgentTools> + WithAITool — register tool class and wire GetMyBookings via AIFunctionFactory
 - Lines 22-23: builder.Build() + MapDefaultEndpoints — build the pipeline, then expose Aspire health/telemetry endpoints
-- Lines 25-28: MapOpenAIResponses + MapOpenAIConversations (DevUI) + MapAGUI (Copilot Runtime)
+- Lines 25-28: MapOpenAIResponses + MapOpenAIConversations (DevUI) + MapAGUIServer (Copilot Runtime)
 -->
 
 ---

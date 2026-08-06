@@ -4,7 +4,7 @@ builder.AddServiceDefaults();
 builder.AddOpenAIClient(connectionName: "openai")
        .AddChatClient("gpt-5.4-mini"); // model deployment name from Azure AI Foundry
 
-builder.Services.AddAGUI();
+builder.Services.AddAGUIServer();
 
 builder.Services.AddOpenAIResponses();
 builder.Services.AddOpenAIConversations();
@@ -25,6 +25,6 @@ app.MapDefaultEndpoints();
 app.MapOpenAIResponses();            // OpenAI-compatible endpoints(DevUI)
 app.MapOpenAIConversations();
 
-app.MapAGUI(travelAgent, "/agui");  // /agui — AGUI (Copilot Runtime)
+app.MapAGUIServer(travelAgent, "/agui");  // /agui — AGUI (Copilot Runtime)
 
 app.Run();
